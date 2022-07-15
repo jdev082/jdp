@@ -19,7 +19,7 @@ then
 fi
 
 function help() {
-    echo "./main.sh
+    echo "jdpkg
 -----------------------
 -v, version
 -h, help
@@ -44,7 +44,7 @@ if [[ $1 == 'install' ]]
 then
     if [ -v "$1" ]
     then
-        echo "./main.sh install <package>"
+        echo "jdpkg install <package>"
 	exit
     fi
 
@@ -65,7 +65,7 @@ if [[ $1 == 'uninstall' ]]
 then
     if [ -v "$1" ]
     then
-        echo "./main.sh uninstall <package>"
+        echo "jdpkg uninstall <package>"
 	exit
     fi
 
