@@ -55,10 +55,10 @@ then
     fi
 
     source /etc/jdpkg/db/$2/install.sh
-    init || echo 'Install script failed at initializaiton.'
-    get_source || echo 'Failed to download application source code.'
-    cd /tmp/$RAND/git
-    install || echo 'Failed to install.'
+    init >& /dev/null || echo 'Install script failed at initializaiton.'
+    get_source >& /dev/null || echo 'Failed to download application source code.'
+    cd /tmp/$RAND/git >& /dev/null
+    install >& /dev/null || echo 'Failed to install.'
 fi
 
 if [[ $1 == 'uninstall' ]]
