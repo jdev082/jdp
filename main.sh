@@ -3,10 +3,10 @@
 # JaydenDev, MIT License, 2022
 
 # identify OS and pass to package
-if [ "$(uname)" == "Darwin" ]; then
-    export osType == "darwinSystem"        
+if [ "$(uname)"="Darwin" ]; then
+    export osType="darwinSystem"        
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    export osType == "linuxSystem"
+    export osType="linuxSystem"
 fi
 
 if [[ -z $1 ]]
