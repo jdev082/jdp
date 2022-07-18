@@ -56,7 +56,7 @@ fi
 
 if [[ $1 == 'install' ]]
 then
-    if [ "$(uname)"="Darwin" ]; then
+    if [ "$(uname)" = "Darwin" ]; then
         if [[ $mac_support = 0 ]]
         then
             echo "This software does not support your OS [MacOS/Darwin]."
