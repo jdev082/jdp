@@ -35,6 +35,12 @@ install, install
 update, update"
 }
 
+if [[ $1 == '-v' ]]
+then
+    echo 'jdpkg v1.0.0-devPreview'
+    exit 0
+fi
+
 if [[ $1 == 'update' ]]
 then
     echo 'Updating database!'
