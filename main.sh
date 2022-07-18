@@ -105,7 +105,7 @@ fi
 
 if [[ $1 == '-t' ]]
 then
-	if [[ ! -v $2 ]]
+	if [[ -v $2 ]]
 	then
 		echo 'Provide path to package (must be in directory)'
 	fi
