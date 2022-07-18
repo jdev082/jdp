@@ -31,8 +31,8 @@ function help() {
 -----------------------
 -v, version
 -h, help
--i, install
--u, update"
+install, install
+update, update"
 }
 
 if [[ $1 == 'update' ]]
@@ -50,8 +50,8 @@ fi
 
 if [[ $1 == 'install' ]]
 then
-    if [ "$(uname)" == "Darwin" ]; then
-        if [[ $mac_support == 0 ]]
+    if [ "$(uname)"="Darwin" ]; then
+        if [[ $mac_support = 0 ]]
         then
             echo "This software does not support your OS [MacOS/Darwin]."
             exit 1
@@ -95,4 +95,18 @@ then
 
     source /etc/jdpkg/db/$2/install.sh
     remove || echo 'Failed to install.'
+fi
+
+if [[ $1 == '-t' ]]
+then
+	if [[ ! -v $2 ]]
+	then
+		echo 'Provide path to package (must be in directory)'
+	fi
+	cd $2 || echo 'Invalid package path' && exit 1
+	source install.sh
+	init
+	get_source
+	install
+	exit 0
 fi
