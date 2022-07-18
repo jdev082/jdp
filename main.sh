@@ -3,7 +3,7 @@
 # JaydenDev, MIT License, 2022
 
 # identify OS and pass to package
-if [ "$(uname)"="Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
     export osType="darwinSystem"        
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     export osType="linuxSystem"
@@ -72,10 +72,10 @@ fi
         exit
     fi
 
-    source /etc/jdpkg/db/$2/install.sh
+    source /etc/jdpkg/db/"$2"/install.sh
     init >& /dev/null || echo 'Install script failed at initializaiton.'
     get_source >& /dev/null || echo 'Failed to download application source code.'
-    cd /tmp/$RAND/git >& /dev/null
+    cd /tmp/"$RAND"/git >& /dev/null || exit
     install >& /dev/null || echo 'Failed to install.'
 fi
 
@@ -93,7 +93,7 @@ then
         exit
     fi
 
-    source /etc/jdpkg/db/$2/install.sh
+    source /etc/jdpkg/db/"$2"/install.sh
     remove || echo 'Failed to install.'
 fi
 
@@ -103,7 +103,7 @@ then
 	then
 		echo 'Provide path to package (must be in directory)'
 	fi
-	cd $2 || echo 'Invalid package path' && exit 1
+	cd "$2" || echo 'Invalid package path' && exit 1
 	source install.sh
 	init
 	get_source
