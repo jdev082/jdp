@@ -42,6 +42,16 @@ fi
 
 if [[ $1 == 'install' ]]
 then
+    if [ "$(uname)" == "Darwin" ]; then
+        if [[ $mac_support == 0 ]]
+        then
+            echo "This software does not support your OS [MacOS/Darwin]."
+            exit 1
+        else
+            echo "This package supports your system"
+        fi     
+fi
+
     if [ -v "$1" ]
     then
         echo "jdpkg install <package>"
