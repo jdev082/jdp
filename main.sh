@@ -107,6 +107,7 @@ then
 fi
 
 if [[ $1 == '-t' ]]
+echo '-t flag is not recommended as its in alpha state'
 then
 	if [[ -v $2 ]]
 	then
@@ -114,8 +115,8 @@ then
 	fi
 	cd "$2" || echo 'Invalid package path' && exit 1
 	source install.sh
-	init
-	get_source
+    git clone $sources dir 
+    cd dir
 	install
 	exit 0
 fi
