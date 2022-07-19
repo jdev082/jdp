@@ -84,7 +84,7 @@ fi
 
     source /etc/jdpkg/db/"$2"/install.sh
     init >& /dev/null || echo 'Install script failed at initializaiton.'
-    get_source >& /dev/null || echo 'Failed to download application source code.'
+    git clone $sources || echo 'Failed to download application source code.'
     cd /tmp/"$RAND"/git >& /dev/null || exit
     install >& /dev/null || echo 'Failed to install.'
 fi
