@@ -55,6 +55,10 @@ then
 fi
 
 if [[ $1 == 'install' ]]
+RAND=$RANDOM
+export instdir = /tmp/$RAND
+mkdir /tmp/$RAND
+cd /tmp/$RAND
 then
     if [ "$(uname)" = "Darwin" ]; then
         if [[ $mac_support = 0 ]]
