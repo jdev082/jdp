@@ -46,6 +46,7 @@ then
     echo 'Updating database!'
     sudo rm -rf /etc/jdpkg/db
     sudo git clone https://github.com/JaydenDev/jdpkg-db /etc/jdpkg/db
+    exit 0
 fi
 
 if [[ $1 == '-h' ]]
@@ -81,8 +82,16 @@ fi
         echo "package $2 does not exist in the repository."
         exit
     fi
-
     source /etc/jdpkg/db/"$2"/install.sh
+    if [[ command -v /usr/bin/pacman ]]
+    then
+        echo "Your OS supports rich package management, installing dependencies"
+        source /etc/jdpkg/db/pkgequivs
+        #for i in "${deps}"
+        #do
+        #    # do whatever on "$i" here
+done
+    fi
     git clone $sources $instdir/git || echo 'Failed to download application source code.'
     cd $instdir/git >& /dev/null || exit
     install >& /dev/null || echo 'Failed to install.'
