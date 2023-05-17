@@ -59,3 +59,16 @@ then
         exit 1
     fi
 fi
+
+if [[ $1 == 'uninstall' ]]
+        if [ -f "$JDPKG_ROOT/${repos[@]}/$2/Makefile" ]
+    then
+        echo "Package exists in ${repos[@]}, installing..."
+        cd "$JDPKG_ROOT/${repos[@]}/$2"
+        make uninstall
+        exit 0
+    else 
+        echo "Package invalid, does not exist, or has an invalid Makefile."
+        exit 1
+    fi
+fi
