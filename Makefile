@@ -7,7 +7,7 @@ install:
 	@cp -p main.sh $(DESTDIR)$(PREFIX)/jdp
 	@chmod 755 $(DESTDIR)$(PREFIX)/jdp
 	@mkdir -p ~/.local/share/jdp
-	@cp -p jdpkg.conf $(DESTDIR)$(PREFIX)
+	@cp -p jdp.conf $(DESTDIR)$(PREFIX)
 
 
 uninstall:
