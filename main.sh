@@ -3,7 +3,7 @@
 # JaydenDev, MIT License, 2022
 JDPKG_ROOT=~/.local/share/jdp
 mkdir -p $JDPKG_ROOT
-source jdpkg.conf
+source jdp.conf
 
 # identify OS and pass to package
 if [ "$(uname)" = "Darwin" ]; then
