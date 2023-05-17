@@ -1,7 +1,7 @@
 #!/bin/bash
 # jdpkg main file
 # JaydenDev, MIT License, 2022
-JDPKG_ROOT=~/.local/share/jdpkg
+JDPKG_ROOT=~/.local/share/jdp
 mkdir -p $JDPKG_ROOT
 source jdpkg.conf
 
@@ -19,7 +19,7 @@ then
 fi
 
 function help() {
-    echo "jdpkg
+    echo "jdp
 -----------------------
 -v, version
 -h, help
