@@ -1,6 +1,9 @@
 #!/bin/bash
 # jdpkg main file
 # JaydenDev, MIT License, 2022
+JDPKG_ROOT=~/.local/share/jdpkg
+mkdir -p $JDPKG_ROOT
+source jdpkg.conf
 
 # identify OS and pass to package
 if [ "$(uname)" = "Darwin" ]; then
@@ -13,17 +16,6 @@ if [[ -z $1 ]]
 then
     echo "Run this script with '-h' to see a list of arguments."
     exit 1
-fi
-
-if [[ ! -d /etc/jdpkg ]] 
-then
-    echo '/etc/jdpkg does not exist, creating...' && sudo mkdir /etc/jdpkg
-fi
-
-if [[ ! -d /etc/jdpkg/db ]]
-then
-    echo 'Downloading database...'
-    sudo git clone https://github.com/JaydenDev/jdpkg-db /etc/jdpkg/db
 fi
 
 function help() {
@@ -43,9 +35,8 @@ fi
 
 if [[ $1 == 'update' ]]
 then
-    echo 'Updating database!'
-    sudo rm -rf /etc/jdpkg/db
-    sudo git clone https://github.com/JaydenDev/jdpkg-db /etc/jdpkg/db
+    rm -rf "$JDPKG_ROOT/${repos[@]}"
+    git clone "https://github.com/${repos[@]}" "$JDPKG_ROOT/${repos[@]}"
     exit 0
 fi
 
@@ -56,76 +47,15 @@ then
 fi
 
 if [[ $1 == 'install' ]]
-RAND=$RANDOM
-export instdir = /tmp/$RAND
-mkdir /tmp/$RAND
-cd /tmp/$RAND
 then
-    if [ "$(uname)" = "Darwin" ]; then
-        if [[ $mac_support = 0 ]]
-        then
-            echo "This software does not support your OS [MacOS/Darwin]."
-            exit 1
-        else
-            echo "This package supports your system"
-        fi     
-fi
-
-    if [ -v "$1" ]
+    if [ -f "$JDPKG_ROOT/${repos[@]}/$2/Makefile" ]
     then
-        echo "jdpkg install <package>"
-	exit
+        echo "Package exists in ${repos[@]}, installing..."
+        cd "$JDPKG_ROOT/${repos[@]}/$2"
+        make install
+        exit 0
+    else 
+        echo "Package invalid or does not exist in repo."
+        exit 1
     fi
-
-    if [[ ! -d /etc/jdpkg/db/$2 ]]
-    then
-        echo "package $2 does not exist in the repository."
-        exit
-    fi
-    source /etc/jdpkg/db/"$2"/install.sh
-    if [[ command -v /usr/bin/pacman ]]
-    then
-        echo "Your OS supports rich package management, installing dependencies"
-        source /etc/jdpkg/db/pkgequivs
-        #for i in "${deps}"
-        #do
-        #    # do whatever on "$i" here
-done
-    fi
-    git clone $sources $instdir/git || echo 'Failed to download application source code.'
-    cd $instdir/git >& /dev/null || exit
-    install >& /dev/null || echo 'Failed to install.'
-fi
-
-if [[ $1 == 'uninstall' ]]
-then
-    if [ -v "$1" ]
-    then
-        echo "jdpkg uninstall <package>"
-	exit
-    fi
-
-    if [[ ! -d /etc/jdpkg/db/$2 ]]
-    then
-        echo "package $2 does not exist in the repository."
-        exit
-    fi
-
-    source /etc/jdpkg/db/"$2"/install.sh
-    remove || echo 'Failed to install.'
-fi
-
-if [[ $1 == '-t' ]]
-echo '-t flag is not recommended as its in alpha state'
-then
-	if [[ -v $2 ]]
-	then
-		echo 'Provide path to package (must be in directory)'
-	fi
-	cd "$2" || echo 'Invalid package path' && exit 1
-	source install.sh
-    git clone $sources dir 
-    cd dir
-	install
-	exit 0
 fi

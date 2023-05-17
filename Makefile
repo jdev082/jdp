@@ -1,12 +1,13 @@
-PREFIX = /usr/local
+PREFIX = ~/.local/bin
 
 all:
 	@echo Run \'make install\' to install this program!.
 
 install:
-	@mkdir -p $(DESTDIR)$(PREFIX)/bin
-	@cp -p main.sh $(DESTDIR)$(PREFIX)/bin/jdpkg
-	@chmod 755 $(DESTDIR)$(PREFIX)/bin/jdpkg
+	@cp -p main.sh $(DESTDIR)$(PREFIX)/jdpkg
+	@chmod 755 $(DESTDIR)$(PREFIX)/jdpkg
+	@mkdir -p ~/.local/share/jdpkg/
+	@cp -p jdpkg.conf $(DESTDIR)$(PREFIX)
 
 
 uninstall:
