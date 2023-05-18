@@ -35,8 +35,11 @@ fi
 
 if [[ $1 == 'update' ]]
 then
-    rm -rf "$JDPKG_ROOT/${repos[@]}"
-    git clone "https://github.com/${repos[@]}" "$JDPKG_ROOT/${repos[@]}"
+    for i in "${repos[@]}"
+    do    
+        rm -rf "$JDPKG_ROOT/$i"
+        git clone "https://github.com/$i" "$JDPKG_ROOT/$i"
+    done
     exit 0
 fi
 
