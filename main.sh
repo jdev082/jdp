@@ -57,6 +57,8 @@ then
         then
             echo "Package exists in $i, installing..."
             make -C "$JDPKG_ROOT/$i/$2" install
+        else
+            echo "Package does not exist in $i!"
         fi
     done
 fi
