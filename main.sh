@@ -56,6 +56,7 @@ then
         if [ -f "$JDPKG_ROOT/$i/$2/Makefile" ]
         then
             echo "Package exists in $i, installing..."
+            make -C "$JDPKG_ROOT/$i/$2" install
         fi
     done
 fi
