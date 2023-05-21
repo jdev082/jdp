@@ -51,19 +51,17 @@ fi
 
 if [[ $1 == 'install' ]]
 then
-    if [ -f "$JDPKG_ROOT/${repos[@]}/$2/Makefile" ]
-    then
-        echo "Package exists in ${repos[@]}, installing..."
-        cd "$JDPKG_ROOT/${repos[@]}/$2"
-        make install
-        exit 0
-    else 
-        echo "Package invalid or does not exist in repo."
-        exit 1
-    fi
+    for i in "${repos[@]}"
+    do
+        if [ -f "$JDPKG_ROOT/$i/$2/Makefile" ]
+        then
+            echo "Package exists in $i, installing..."
+        fi
+    done
 fi
 
 if [[ $1 == 'uninstall' ]]
+    then
         if [ -f "$JDPKG_ROOT/${repos[@]}/$2/Makefile" ]
     then
         echo "Package exists in ${repos[@]}, installing..."
